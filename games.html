@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Calculator</title>
+
+    <style>
+        body{
+            background:#1e1e1e;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            height:100vh;
+            font-family:Arial;
+        }
+
+        .calculator{
+            background:#2c2c2c;
+            padding:20px;
+            border-radius:15px;
+            box-shadow:0px 0px 10px black;
+            width: 280px;
+        }
+
+        #display{
+            width:87%;
+            height:60px;
+            font-size:24px;
+            text-align:right;
+            margin-bottom:10px;
+            padding:10px;
+            border:none;
+            border-radius:10px;
+             background:#444;
+             color:white;
+        }
+
+        .buttons{
+            display:grid;
+            grid-template-columns:repeat(4, 60px);
+            gap:10px;
+        }
+
+        button{
+            height:60px;
+            font-size:20px;
+            border:none;
+            border-radius:10px;
+            cursor:pointer;
+            background:#444;
+            color:white;
+        }
+
+        button:hover{
+            background:#666;
+        }
+
+        .equal{
+            background:#4caf50;
+        }
+
+        .clear{
+            background:#f44336;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="calculator">
+
+    <input type="text" id="display" disabled>
+
+    <div class="buttons">
+
+        <button onclick="press('7')">7</button>
+        <button onclick="press('8')">8</button>
+        <button onclick="press('9')">9</button>
+        <button onclick="press('/')">/</button>
+
+        <button onclick="press('4')">4</button>
+        <button onclick="press('5')">5</button>
+        <button onclick="press('6')">6</button>
+        <button onclick="press('*')">*</button>
+
+        <button onclick="press('1')">1</button>
+        <button onclick="press('2')">2</button>
+        <button onclick="press('3')">3</button>
+        <button onclick="press('-')">-</button>
+
+        <button onclick="press('0')">0</button>
+        <button onclick="press('.')">.</button>
+        <button class="equal" onclick="calculate()">=</button>
+        <button onclick="press('+')">+</button>
+
+        <button class="clear" onclick="clearDisplay()" style="grid-column:span 4;">
+            Clear
+        </button>
+
+    </div>
+
+</div>
+
+<script>
+
+let display = document.getElementById("display");
+
+function press(value){
+    display.value += value;
+}
+
+function calculate(){
+    try{
+        display.value = eval(display.value);
+    }
+    catch{
+        display.value = "Error";
+    }
+}
+
+function clearDisplay(){
+    display.value = "";
+}
+
+</script>
+
+</body>
+</html>

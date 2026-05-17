@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login Page</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="nav">
+
+    <div class="nav-links">
+        <a href="index.html">Login</a>
+        <a href="about.html">About</a>
+        <a href="blog.html">Blog</a>
+        <a href="contact.html">Contact</a>
+    </div>
+
+    <button class="mode-btn" onclick="toggleMode()">
+        🌙 Mode
+    </button>
+
+</div>
+
+<div class="container">
+
+    <h2>Login Form</h2>
+
+    <input type="text" id="username" placeholder="Enter Username">
+
+    <input type="password" id="password" placeholder="Enter Password">
+
+    <button onclick="loginUser()">Login</button>
+
+    <p>
+        Demo Login:<br>
+        Username: admin<br>
+        Password: 1234
+    </p>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
