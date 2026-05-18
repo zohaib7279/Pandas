@@ -4,12 +4,13 @@
     <title>Rock Paper Scissors Game</title>
 
     <style>
+
         body{
             font-family: Arial;
             text-align: center;
             background: #1e1e1e;
             color: white;
-            margin-top: 50px;
+            margin-top: 40px;
         }
 
         h1{
@@ -25,19 +26,16 @@
             border-radius: 10px;
         }
 
-        .rock{ background: #ff4d4d; }
-        .paper{ background: #4da6ff; }
-        .scissors{ background: #4dff88; }
-
-        #result{
-            margin-top: 20px;
-            font-size: 22px;
-            font-weight: bold;
+        .rock{
+            background: #ff4d4d;
         }
 
-        #score{
-            margin-top: 10px;
-            font-size: 18px;
+        .paper{
+            background: #4da6ff;
+        }
+
+        .scissors{
+            background: #4dff88;
         }
 
         #restart{
@@ -50,100 +48,208 @@
             border-radius: 10px;
             cursor: pointer;
         }
+
+        #result{
+            margin-top: 20px;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        #score{
+            margin-top: 10px;
+            font-size: 20px;
+        }
+
+        #matchScore{
+            margin-top: 20px;
+            font-size: 22px;
+            color: gold;
+        }
+
     </style>
 </head>
 
 <body>
 
 <h1>Rock Paper Scissors</h1>
-<h3>First to 30 Wins 🏆</h3>
 
-<button class="btn rock" onclick="play('rock')">Rock 🪨</button>
-<button class="btn paper" onclick="play('paper')">Paper 📄</button>
-<button class="btn scissors" onclick="play('scissors')">Scissors ✂️</button>
+<h2>First To 30 Wins 🏆</h2>
+
+<button class="btn rock" onclick="play('rock')">
+    Rock 🪨
+</button>
+
+<button class="btn paper" onclick="play('paper')">
+    Paper 📄
+</button>
+
+<button class="btn scissors" onclick="play('scissors')">
+    Scissors ✂️
+</button>
 
 <br>
 
-<button id="restart" onclick="restartGame()">Restart Game 🔄</button>
+<button id="restart" onclick="restartGame()">
+    Restart Game 🔄
+</button>
 
 <div id="result"></div>
+
 <div id="score"></div>
+
+<div id="matchScore"></div>
 
 <script>
 
-// ---------------- VARIABLES ----------------
+// ---------------- PLAYER SCORES ----------------
+
 let userScore = 0;
 let computerScore = 0;
+
+// ---------------- MATCH WIN SCORES ----------------
+
+let userMatchWins = 0;
+let computerMatchWins = 0;
+
+// ---------------- CHOICES ----------------
 
 let choices = ["rock", "paper", "scissors"];
 
 // ---------------- PLAY FUNCTION ----------------
+
 function play(userChoice){
 
-    let computerChoice = choices[Math.floor(Math.random() * 3)];
+    let computerChoice =
+    choices[Math.floor(Math.random() * 3)];
 
     let resultText = "";
 
     // DRAW
     if(userChoice === computerChoice){
+
         resultText = "Draw 🤝";
+
     }
 
     // USER WIN
     else if(
+
         (userChoice === "rock" && computerChoice === "scissors") ||
+
         (userChoice === "paper" && computerChoice === "rock") ||
+
         (userChoice === "scissors" && computerChoice === "paper")
+
     ){
+
         resultText = "You Win 🎉";
+
         userScore++;
+
     }
 
     // COMPUTER WIN
     else{
+
         resultText = "Computer Wins 💻";
+
         computerScore++;
+
     }
 
     // SHOW RESULT
+
     document.getElementById("result").innerHTML =
-    `You: ${userChoice} | Computer: ${computerChoice} <br><br> ${resultText}`;
+
+    `You: ${userChoice} | Computer: ${computerChoice}
+    
+    <br><br>
+    
+    ${resultText}`;
 
     updateScore();
+
     checkWinner();
 }
 
 // ---------------- UPDATE SCORE ----------------
+
 function updateScore(){
+
     document.getElementById("score").innerHTML =
-    `Your Score: ${userScore} | Computer Score: ${computerScore}`;
+
+    `Your Score: ${userScore}
+    
+    | 
+    
+    Computer Score: ${computerScore}`;
+
+    document.getElementById("matchScore").innerHTML =
+
+    `🏆 Your Match Wins: ${userMatchWins}
+    
+    | 
+    
+    💻 Computer Match Wins: ${computerMatchWins}`;
 }
 
 // ---------------- CHECK WINNER ----------------
+
 function checkWinner(){
 
+    // USER MATCH WIN
+
     if(userScore >= 30){
-        alert("🎉 Congratulations! You reached 30 points and WON the game!");
-        restartGame();
+
+        userMatchWins++;
+
+        alert("🎉 You Won This Match!");
+
+        restartRound();
     }
 
+    // COMPUTER MATCH WIN
+
     else if(computerScore >= 30){
-        alert("💻 Computer reached 30 points first! You LOST the game!");
-        restartGame();
+
+        computerMatchWins++;
+
+        alert("💻 Computer Won This Match!");
+
+        restartRound();
     }
 }
 
-// ---------------- RESTART GAME ----------------
+// ---------------- RESTART ROUND ----------------
+
+function restartRound(){
+
+    userScore = 0;
+
+    computerScore = 0;
+
+    document.getElementById("result").innerHTML = "";
+
+    updateScore();
+}
+
+// ---------------- FULL RESTART ----------------
+
 function restartGame(){
 
     userScore = 0;
     computerScore = 0;
 
+    userMatchWins = 0;
+    computerMatchWins = 0;
+
     document.getElementById("result").innerHTML = "";
+
     updateScore();
 }
 
-// initial score show
+// ---------------- INITIAL SCORE ----------------
+
 updateScore();
 
 </script>
